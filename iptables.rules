@@ -1,0 +1,26 @@
+# Empty iptables rule file
+*filter
+#:INPUT ACCEPT [0:0]
+#:FORWARD ACCEPT [0:0]
+#:OUTPUT ACCEPT [0:0]
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+#Basic
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+
+#Workspaces
+-A OUTPUT -p tcp --dport 4172 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p udp --dport 4172 -j ACCEPT
+
+#GPG
+-A OUTPUT -p tcp --dport 11371 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+#libvirt
+-A OUTPUT -p udp --sport 53 -s 192.168.122.0/24 -j ACCEPT
+COMMIT

@@ -5,7 +5,7 @@
 :OUTPUT DROP [0:0]
 #Basic
 -A INPUT -i lo -j ACCEPT
--A OUTPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p ipv6-icmp -j ACCEPT
 -A OUTPUT -p tcp -m conntrack --ctstate NEW,ESTABLISHED --dport 80 -j ACCEPT

@@ -24,4 +24,7 @@
 
 #libvirt
 -A OUTPUT -p udp --sport 53 -s 192.168.122.0/24 -j ACCEPT
+
+#discord
+-A OUTPUT -p udp --dport 50000:65535 -j ACCEPT
 COMMIT
